@@ -1,0 +1,3 @@
+den1.mssql8.gear.host
+portaldatabase
+Test1234!
