@@ -1,0 +1,33 @@
+﻿body {
+    background: url(../Image/1.jpg) no-repeat;
+    background-size: cover;
+}
+
+[id= "login-div"] {
+    background-color:steelblue;
+    width: 250px;
+    margin: 50px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    border: 1px solid #878bf2;
+    padding: 10px 10px;
+}
+
+[id= "page-title"] {
+    
+    width: 600px;
+    text-decoration-style:solid;
+    margin: 50px;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+    font-size:xx-large;
+    font-style:italic;
+    color:aliceblue;     
+}
+
+.field-validation-error{
+    color:red;
+}
