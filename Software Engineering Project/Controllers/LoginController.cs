@@ -15,6 +15,13 @@ namespace Software_Engineering_Project.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            int AccountID = (int)Session["AccountID"];
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost] //important for logging in
         public ActionResult Authorize(Software_Engineering_Project.Models.Account userModel)
         {
@@ -27,7 +34,8 @@ namespace Software_Engineering_Project.Controllers
                 {
                     if (account_status != null) //check if status is good
                     {
-                        Session["Account ID"] = userDetails.AccountID;
+                        Session["AccountID"] = userDetails.AccountID;
+                        Session["RoleID"] = userDetails.RoleID;
                         return RedirectToAction("Index", "Home");
                     }
                     else
