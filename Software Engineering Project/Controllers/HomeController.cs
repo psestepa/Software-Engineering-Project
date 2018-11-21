@@ -35,5 +35,10 @@ namespace Software_Engineering_Project.Controllers
             return RedirectToAction("Index", "User_Management");
         }
 
+        public ActionResult Register()
+        {
+            return RedirectToAction("Index", "Register");
+        }
+
     }
 }
