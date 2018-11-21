@@ -29,13 +29,13 @@
                         {
                             <li>@Html.ActionLink("User Management", "User_Management", "Home")</li>
                         }
-                        else if (Convert.ToInt32(Session["RoleID"]) == 0 || Convert.ToInt32(Session["RoleID"]) == 1)
+                        if (Convert.ToInt32(Session["RoleID"]) == 0 || Convert.ToInt32(Session["RoleID"]) == 1)
                         {
                             <li>@Html.ActionLink("Process Request", "Process_Request", "Home")</li>
                         }
-                        else if (Convert.ToInt32(Session["RoleID"]) == 0 || Convert.ToInt32(Session["RoleID"]) == 2)
+                        if (Convert.ToInt32(Session["RoleID"]) == 0 || Convert.ToInt32(Session["RoleID"]) == 2)
                         {
-                            <li>@Html.ActionLink("Process Request", "Process_Request", "Home")</li>
+                            <li>@Html.ActionLink("Make Request", "Make_Request", "Home")</li>
                         }
 
                     }
@@ -56,11 +56,7 @@
 
     <div class="container body-content">
         @RenderBody()
-       
-
     </div>
-
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
