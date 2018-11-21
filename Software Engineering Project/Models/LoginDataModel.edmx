@@ -15,11 +15,20 @@
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Links">
+          <Key>
+            <PropertyRef Name="LinkID" />
+          </Key>
+          <Property Name="LinkID" Type="int" Nullable="false" />
+          <Property Name="URL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
-            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="Role_ID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="Role_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Role_description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -35,6 +44,7 @@ warning 6002: The table/view 'portaldatabase.dbo.Status' does not have a primary
         </EntityType>
         <EntityContainer Name="portaldatabaseModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -59,11 +69,11 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
         </EntityType>
         <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="RoleID" />
           </Key>
-          <Property Name="Role_ID" Type="Int32" Nullable="false" />
           <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Role_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -77,7 +87,17 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Links" EntityType="portaldatabaseModel.Link" />
         </EntityContainer>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="LinkID" />
+          </Key>
+          <Property Name="LinkID" Type="Int32" Nullable="false" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -98,7 +118,7 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="portaldatabaseModel.Role">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
                 <ScalarProperty Name="Role_description" ColumnName="Role_description" />
               </MappingFragment>
@@ -109,6 +129,16 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="Status1" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="portaldatabaseModel.Link">
+              <MappingFragment StoreEntitySet="Links">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

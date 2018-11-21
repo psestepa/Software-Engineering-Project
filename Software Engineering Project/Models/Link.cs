@@ -12,10 +12,11 @@ namespace Software_Engineering_Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class Link
     {
-        public string Role_Name { get; set; }
-        public string Role_description { get; set; }
+        public int LinkID { get; set; }
+        public string URL { get; set; }
         public int RoleID { get; set; }
+        public int StatusID { get; set; }
     }
 }
