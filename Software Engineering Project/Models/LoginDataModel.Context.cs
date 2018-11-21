@@ -27,7 +27,6 @@ namespace Software_Engineering_Project.Models
     
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
         public DbSet<Status> Status { get; set; }
     }
 }

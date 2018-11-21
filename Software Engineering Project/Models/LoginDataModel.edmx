@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="portaldatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="portaldatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="AccountID" />
@@ -14,18 +14,6 @@
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'portaldatabase.dbo.Permissions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Permissions">
-          <Key>
-            <PropertyRef Name="Permission_ID" />
-            <PropertyRef Name="Permission_Name" />
-            <PropertyRef Name="Permission_description" />
-          </Key>
-          <Property Name="Permission_ID" Type="int" Nullable="false" />
-          <Property Name="Permission_Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Permission_description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -48,13 +36,6 @@ warning 6002: The table/view 'portaldatabase.dbo.Status' does not have a primary
         <EntityContainer Name="portaldatabaseModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Permissions" EntityType="Self.Permissions" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Permissions].[Permission_ID] AS [Permission_ID], 
-[Permissions].[Permission_Name] AS [Permission_Name], 
-[Permissions].[Permission_description] AS [Permission_description]
-FROM [dbo].[Permissions] AS [Permissions]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Status" EntityType="Self.Status" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [Status].[StatusID] AS [StatusID], 
@@ -62,8 +43,7 @@ FROM [dbo].[Permissions] AS [Permissions]</DefiningQuery>
 FROM [dbo].[Status] AS [Status]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="portaldatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -85,16 +65,6 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
           <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Role_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="Permission">
-          <Key>
-            <PropertyRef Name="Permission_ID" />
-            <PropertyRef Name="Permission_Name" />
-            <PropertyRef Name="Permission_description" />
-          </Key>
-          <Property Name="Permission_ID" Type="Int32" Nullable="false" />
-          <Property Name="Permission_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Permission_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="StatusID" />
@@ -106,7 +76,6 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
         <EntityContainer Name="portaldatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="Permissions" EntityType="Self.Permission" />
           <EntitySet Name="Status" EntityType="Self.Status" />
         </EntityContainer>
       </Schema>
@@ -132,15 +101,6 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
                 <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
                 <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
                 <ScalarProperty Name="Role_description" ColumnName="Role_description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Permissions">
-            <EntityTypeMapping TypeName="portaldatabaseModel.Permission">
-              <MappingFragment StoreEntitySet="Permissions">
-                <ScalarProperty Name="Permission_ID" ColumnName="Permission_ID" />
-                <ScalarProperty Name="Permission_Name" ColumnName="Permission_Name" />
-                <ScalarProperty Name="Permission_description" ColumnName="Permission_description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

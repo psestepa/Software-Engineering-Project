@@ -176,9 +176,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoginDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Permission.cs">
-      <DependentUpon>LoginDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
