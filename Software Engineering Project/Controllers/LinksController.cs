@@ -31,7 +31,7 @@ namespace Software_Engineering_Project.Controllers
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
                 //return a list of links where roleID from db == roleID of the logged user
-                return db.Links.ToList().Where(x => x.RoleID == User_RoleID);
+                return db.Links.ToList().Where(x => x.RoleID == User_RoleID && x.StatusID == 1);
             }
         }
 
