@@ -11,7 +11,12 @@ namespace Software_Engineering_Project.Controllers
         // GET: Links
         public ActionResult Index()
         {
-            return View();
+            if (Session["AccountID"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                return View();
         }
     }
 }
