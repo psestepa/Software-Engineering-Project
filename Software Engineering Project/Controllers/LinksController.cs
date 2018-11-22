@@ -17,19 +17,20 @@ namespace Software_Engineering_Project.Controllers
                 return RedirectToAction("Index", "Home");
             }
             else
-            {
-
+            {   
+                //return to view a list of links that was based on the user logged in
                 IEnumerable<Link> Li = getLinks();
-                ViewData["Links"] = Li;
                 return View(Li);
             }
         }
 
         public IEnumerable<Link> getLinks()
         {
+            //checks if RoleID in the database == roleID in the links
             int User_RoleID = Convert.ToInt32(Session["RoleID"]);
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
+                //return a list of links where roleID from db == roleID of the logged user
                 return db.Links.ToList().Where(x => x.RoleID == User_RoleID);
             }
         }
