@@ -39,6 +39,10 @@ namespace Software_Engineering_Project.Controllers
         {
             return RedirectToAction("Index", "Register");
         }
+        public ActionResult Links()
+        {
+            return RedirectToAction("Index", "Links");
+        }
 
     }
 }
