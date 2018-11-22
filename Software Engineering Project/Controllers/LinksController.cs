@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace Software_Engineering_Project.Controllers
 {
-    public class User_ManagementController : Controller
+    public class LinksController : Controller
     {
-        // GET: UserManagement
+        // GET: Links
         public ActionResult Index()
         {
-            if (Convert.ToInt32(Session["RoleID"]) != 0 &&Session["AccountID"] == null)
+            if (Session["AccountID"] == null)
             {
                 return RedirectToAction("Index", "Home");
             }
