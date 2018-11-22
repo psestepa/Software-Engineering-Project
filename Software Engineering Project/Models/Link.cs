@@ -19,4 +19,6 @@ namespace Software_Engineering_Project.Models
         public int RoleID { get; set; }
         public int StatusID { get; set; }
     }
+
+
 }

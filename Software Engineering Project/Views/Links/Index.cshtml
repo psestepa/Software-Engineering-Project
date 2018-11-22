@@ -1,8 +1,9 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+
+@model IEnumerable<Software_Engineering_Project.Models.Link>
 
 <!DOCTYPE html>
 
@@ -13,7 +14,24 @@
     Links
 </head>
 <body>
-    <div> 
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.URL)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.URL)
+        </td>
+    </tr>
+}
+        </table>
+
     </div>
 </body>
 </html>
