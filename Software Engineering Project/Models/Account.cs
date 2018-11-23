@@ -14,17 +14,21 @@ namespace Software_Engineering_Project.Models
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
+
     public partial class Account
     {
-        public int AccountID { get; set; }
+         public int AccountID { get; set; }
         [Required(ErrorMessage = "This field is required.")]
         public string Username { get; set; }
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "This field is required.")]
         public string Password { get; set; }
-        public int StatusID { get; set; }
-        public int RoleID { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<int> RoleID { get; set; }
         public string LoginErrorMessage { get; set; }
         public string RegistrationSuccessMessage { get; set; }
     }
 }
+
+
+

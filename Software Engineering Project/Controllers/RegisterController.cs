@@ -42,7 +42,7 @@ namespace Software_Engineering_Project.Controllers
                //add new user to database
                db.Accounts.Add(newUser);
                //save changes to database
-               //db.SaveChanges();
+               db.SaveChanges();
             }
         }
     }

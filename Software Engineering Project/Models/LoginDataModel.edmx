@@ -4,22 +4,22 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="portaldatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="portaldatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="AccountID" />
           </Key>
-          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="AccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="StatusID" Type="int" Nullable="false" />
-          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="RoleID" Type="int" />
         </EntityType>
         <EntityType Name="Links">
           <Key>
             <PropertyRef Name="LinkID" />
           </Key>
-          <Property Name="LinkID" Type="int" Nullable="false" />
+          <Property Name="LinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="URL" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="StatusID" Type="int" Nullable="false" />
@@ -32,12 +32,9 @@
           <Property Name="Role_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Role_description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'portaldatabase.dbo.Status' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="StatusID" />
-            <PropertyRef Name="Status" />
           </Key>
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
@@ -46,14 +43,10 @@ warning 6002: The table/view 'portaldatabase.dbo.Status' does not have a primary
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Status" EntityType="Self.Status" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Status].[StatusID] AS [StatusID], 
-[Status].[Status] AS [Status]
-FROM [dbo].[Status] AS [Status]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="portaldatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -61,49 +54,48 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
           <Key>
             <PropertyRef Name="AccountID" />
           </Key>
-          <Property Name="AccountID" Type="Int32" Nullable="false" />
+          <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="LinkID" />
+          </Key>
+          <Property Name="LinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleID" />
           </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Role_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="StatusID" />
-            <PropertyRef Name="Status1" />
           </Key>
           <Property Name="StatusID" Type="Int32" Nullable="false" />
           <Property Name="Status1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="portaldatabaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="portaldatabaseEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Links" EntityType="Self.Link" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="Links" EntityType="portaldatabaseModel.Link" />
         </EntityContainer>
-        <EntityType Name="Link">
-          <Key>
-            <PropertyRef Name="LinkID" />
-          </Key>
-          <Property Name="LinkID" Type="Int32" Nullable="false" />
-          <Property Name="URL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="portaldatabaseModelStoreContainer" CdmEntityContainer="portaldatabaseEntities">
+        <EntityContainerMapping StorageEntityContainer="portaldatabaseModelStoreContainer" CdmEntityContainer="portaldatabaseEntities1">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="portaldatabaseModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
@@ -112,6 +104,16 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="portaldatabaseModel.Link">
+              <MappingFragment StoreEntitySet="Links">
+                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -129,16 +131,6 @@ FROM [dbo].[Status] AS [Status]</DefiningQuery>
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="Status1" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Links">
-            <EntityTypeMapping TypeName="portaldatabaseModel.Link">
-              <MappingFragment StoreEntitySet="Links">
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="URL" ColumnName="URL" />
-                <ScalarProperty Name="LinkID" ColumnName="LinkID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

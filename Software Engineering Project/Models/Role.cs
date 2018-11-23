@@ -14,8 +14,8 @@ namespace Software_Engineering_Project.Models
     
     public partial class Role
     {
+        public int RoleID { get; set; }
         public string Role_Name { get; set; }
         public string Role_description { get; set; }
-        public int RoleID { get; set; }
     }
 }
