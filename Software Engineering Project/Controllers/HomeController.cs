@@ -35,6 +35,11 @@ namespace Software_Engineering_Project.Controllers
             return RedirectToAction("Index", "User_Management");
         }
 
+        public ActionResult Links_Management()
+        {
+            return RedirectToAction("Index", "Links_Management");
+        }
+
         public ActionResult Register()
         {
             return RedirectToAction("Index", "Register");
@@ -42,6 +47,16 @@ namespace Software_Engineering_Project.Controllers
         public ActionResult Links()
         {
             return RedirectToAction("Index", "Links");
+        }
+
+        public ActionResult Make_Request()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Process_Request()
+        {
+            return RedirectToAction("Index", "Home");
         }
 
     }

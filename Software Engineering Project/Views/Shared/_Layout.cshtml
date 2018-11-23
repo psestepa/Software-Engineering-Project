@@ -39,11 +39,11 @@
                                     <li>@Html.ActionLink("Links Management", "Links_Management", "Home")</li>
                                 </ul>
                             </li>
-                            
+
                         }
                         if (Convert.ToInt32(Session["RoleID"]) == 0 || Convert.ToInt32(Session["RoleID"]) == 1)
                         {
-                            <li><a href="https://www.youtube.com/">Process Request</a></li>
+                            <li>@Html.ActionLink("Process Request", "Process_Request", "Home")</li>
                         }
                         if (Convert.ToInt32(Session["RoleID"]) == 0 || Convert.ToInt32(Session["RoleID"]) == 2)
                         {
@@ -55,7 +55,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["AccountID"] == null)
                     {
-                        <li>@Html.ActionLink("Register", "Register", "Home")</li>                       
+                        <li>@Html.ActionLink("Register", "Register", "Home")</li>
                         <li>@Html.ActionLink("Login", "Login", "Home")</li>
 
                     }
@@ -73,6 +73,9 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

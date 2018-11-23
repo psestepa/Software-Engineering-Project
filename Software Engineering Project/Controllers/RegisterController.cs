@@ -26,7 +26,7 @@ namespace Software_Engineering_Project.Controllers
                 newUser.Username = userModel.Username;
                 newUser.Password = userModel.Password;
                 //Check if user already exists in server
-                if(checkExistingUser(userModel)==false)
+                if(checkExistingUser(userModel)==false && newUser.Username != null && newUser.Password!= null)
                 {
                     //Call function to add to the database
                     AddUser(newUser);
