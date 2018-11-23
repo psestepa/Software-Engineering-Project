@@ -14,6 +14,7 @@
     padding: 10px 10px;
 }
 
+
 [id= "page-title"] {
     
     width: 600px;
@@ -29,5 +30,9 @@
 }
 
 .field-validation-error{
+    color:red;
+}
+
+.field-validation-sucess{
     color:red;
 }

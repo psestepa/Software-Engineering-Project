@@ -25,5 +25,6 @@ namespace Software_Engineering_Project.Models
         public int StatusID { get; set; }
         public int RoleID { get; set; }
         public string LoginErrorMessage { get; set; }
+        public string RegistrationSuccessMessage { get; set; }
     }
 }

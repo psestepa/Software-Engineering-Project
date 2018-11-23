@@ -1,4 +1,4 @@
-﻿
+﻿@model Software_Engineering_Project.Models.Account
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,13 +6,72 @@
 <!DOCTYPE html>
 
 <html>
-<head>
+<head runat="server">
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    Register
+    <link href="~/StyleSheet.css" rel="stylesheet" />
+    <style>
+        #login-div {
+            position: absolute;
+            left: 37%;
+            top: 40%;
+            border: 1px solid #ccc;
+            padding: 10px 10px;
+        }
+    </style>
 </head>
 <body>
-    <div> 
+    <header id="page-title">
+        <text> Welcome to Sanio Software Solutions Portal</text>
+    </header>
+    <div id="login-div">
+        @using (Html.BeginForm("Register", "Register", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-align:center">Register</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Username)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Username)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.Username)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Password)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Password)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.Password)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label class="field-validation-success">@Html.DisplayFor(model => model.RegistrationSuccessMessage)</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="Submit" name="name" value="Register" />
+                        <input type="reset" name="name" value="Cancel" />
+                    </td>
+                </tr>
+            </table>
+        }
     </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
