@@ -12,12 +12,11 @@ namespace Software_Engineering_Project.Controllers
         // GET: Register
         public ActionResult Index()
         {
-
             return View();
         }
 
 
-        [HttpPost] //important for logging in
+        [HttpPost] 
         public ActionResult Register(Software_Engineering_Project.Models.Account userModel)
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
@@ -26,11 +25,19 @@ namespace Software_Engineering_Project.Controllers
                 Account newUser = new Account();
                 newUser.Username = userModel.Username;
                 newUser.Password = userModel.Password;
-                //Call function to add to the database
-                AddUser(newUser);
-                userModel.RegistrationSuccessMessage= "The Account is now registered!";
-                return View("Index", userModel);
-
+                //Check if user already exists in server
+                if(checkExistingUser(userModel)==false)
+                {
+                    //Call function to add to the database
+                    AddUser(newUser);
+                    userModel.RegistrationSuccessMessage = "The Account is now registered!";
+                    return View("Index", userModel);
+                }
+                else
+                {
+                    userModel.RegistrationSuccessMessage = "The Account already exists!!!";
+                    return View("Index", userModel);
+                }
             }
         }
 
@@ -44,6 +51,22 @@ namespace Software_Engineering_Project.Controllers
                //save changes to database
                db.SaveChanges();
             }
+        }
+
+        public bool checkExistingUser(Account userModel)
+        {
+            using (portaldatabaseEntities db = new portaldatabaseEntities())
+            {
+                var Username = db.Accounts.Where(x => x.Username == userModel.Username).FirstOrDefault();
+                //check if user exists in the database already
+                if (Username == null) //not in db
+                {
+                    return false;
+                }
+                else
+                    return true; //return true if user is in db
+            }
+            
         }
     }
 }
