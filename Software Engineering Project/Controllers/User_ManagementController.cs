@@ -11,12 +11,7 @@ namespace Software_Engineering_Project.Controllers
         // GET: UserManagement
         public ActionResult Index()
         {
-            if (Convert.ToInt32(Session["RoleID"]) != 0 && Session["AccountID"] == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-                return View();
+            return View();
         }
     }
 }

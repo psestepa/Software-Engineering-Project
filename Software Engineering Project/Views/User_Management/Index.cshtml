@@ -1,7 +1,10 @@
 ﻿
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    if (Convert.ToInt32(Session["RoleID"]) != 0 && Session["AccountID"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
 }
 
 <!DOCTYPE html>

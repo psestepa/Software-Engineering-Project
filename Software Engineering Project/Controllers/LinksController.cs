@@ -12,16 +12,11 @@ namespace Software_Engineering_Project.Controllers
         // GET: Links
         public ActionResult Index()
         {
-            if (Session["AccountID"] == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {   
-                //return to view a list of links that was based on the user logged in
-                IEnumerable<Link> Li = getLinks();
-                return View(Li);
-            }
+         
+            //return to view a list of links that was based on the user logged in
+            IEnumerable<Link> Li = getLinks();
+            return View(Li);
+            
         }
 
         public IEnumerable<Link> getLinks()
