@@ -7,16 +7,35 @@
     }
 }
 
+@model IEnumerable<Software_Engineering_Project.Models.LinksData>
+
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    Links Management
 </head>
 <body>
-    <div> 
+    <div>
+        <table class="table">
+            <tr>
+                <th>URL</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+
+
+            @foreach (var linkdata in Model)
+            {
+                <tr>
+                    <td>@linkdata.URL</td>
+                    <td>@linkdata.Role_Name</td>
+                    <td>@linkdata.Status</td>
+                </tr>
+            }
+        </table>
+
     </div>
 </body>
 </html>

@@ -16,7 +16,7 @@ namespace Software_Engineering_Project.Models
     public partial class portaldatabaseEntities : DbContext
     {
         public portaldatabaseEntities()
-            : base("name=portaldatabaseEntities1")
+            : base("name=portaldatabaseEntities")
         {
         }
     
@@ -29,5 +29,6 @@ namespace Software_Engineering_Project.Models
         public DbSet<Link> Links { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Status> Status { get; set; }
+        public DbSet<LinksData> LinksData { get; set; }
     }
 }

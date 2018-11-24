@@ -7,16 +7,35 @@
     }
 }
 
+@model IEnumerable<Software_Engineering_Project.Models.UsersData>
+
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    User Management
 </head>
 <body>
-    <div> 
+    <div>
+        <table class="table">
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+
+
+            @foreach (var userdata in Model)
+            {
+                <tr>
+                    <td>@userdata.Username</td>
+                    <td>@userdata.Role_Name</td>
+                    <td>@userdata.Status</td>
+                </tr>
+            }
+        </table>
+
     </div>
 </body>
 </html>
