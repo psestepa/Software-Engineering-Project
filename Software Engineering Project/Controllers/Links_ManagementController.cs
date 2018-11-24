@@ -12,8 +12,12 @@ namespace Software_Engineering_Project.Controllers
         // GET: Links_Management
         public ActionResult Index()
         {
-            IEnumerable<LinksData> Li = getLinksData();
-            return View(Li);
+            IEnumerable<Role> RoleNames = getRoleNames();
+            IEnumerable<Status_Entity> Status = getStatus();
+            IEnumerable<LinksData> Links = getLinksData();
+            var tuple = new Tuple<IEnumerable<LinksData>,IEnumerable<Role>, IEnumerable<Status_Entity>>(Links,RoleNames,Status);
+            return View(tuple);
+
 
         }
 
@@ -24,6 +28,24 @@ namespace Software_Engineering_Project.Controllers
                 return db.Database.SqlQuery<LinksData>("select * from dbo.Links as links, dbo.Roles as roles, dbo.Status as status " +
                     "where links.RoleID = roles.RoleID and links.StatusID = status.StatusID").ToList();
             }
+        }
+
+        public IEnumerable<Role> getRoleNames()
+        {
+            using (portaldatabaseEntities db = new portaldatabaseEntities())
+            {
+                return db.Database.SqlQuery<Role>("select * from dbo.Roles").ToList();
+            }
+
+        }
+
+        public IEnumerable<Status_Entity> getStatus()
+        {
+            using (portaldatabaseEntities db = new portaldatabaseEntities())
+            {
+                return db.Database.SqlQuery<Status_Entity>("select * from dbo.Status").ToList();
+            }
+
         }
     }
 }

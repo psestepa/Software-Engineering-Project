@@ -12,9 +12,9 @@ namespace Software_Engineering_Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Status
+    public partial class Status_Entity
     {
         public int StatusID { get; set; }
-        public string Status1 { get; set; }
+        public string Status { get; set; }
     }
 }

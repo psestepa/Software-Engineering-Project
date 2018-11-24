@@ -1,13 +1,16 @@
 ﻿
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    if (Convert.ToInt32(Session["RoleID"]) != 0 && Session["AccountID"] == null)
+    if (Convert.ToInt32(Session["RoleID"]) != 0 || Session["AccountID"] == null)
     {
         Response.Redirect("~/Home/Index");
     }
 }
 
-@model IEnumerable<Software_Engineering_Project.Models.LinksData>
+@using Software_Engineering_Project.Models;
+@model Tuple<IEnumerable<LinksData>,IEnumerable<Role>,IEnumerable<Status_Entity>>
+
+
 
 <!DOCTYPE html>
 
@@ -23,15 +26,42 @@
                 <th>URL</th>
                 <th>Role</th>
                 <th>Status</th>
+
             </tr>
 
 
-            @foreach (var linkdata in Model)
+            @foreach (var linkdata in Model.Item1)
             {
                 <tr>
                     <td>@linkdata.URL</td>
-                    <td>@linkdata.Role_Name</td>
-                    <td>@linkdata.Status</td>
+                    <td>
+                        <select id="RoleNamesList">
+                            <option>@linkdata.Role_Name</option>
+                            @foreach (var options in Model.Item2)
+                            {
+                                if (linkdata.Role_Name != options.Role_Name)
+                                {
+                                    <option onchange="EditRole">@options.Role_Name</option>
+                                }
+
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select id="StatusList">
+                            <option>@linkdata.Status</option>
+                            @foreach (var options in Model.Item3)
+                            {
+                                if (linkdata.Status != options.Status)
+                                {
+                                    <option>@options.Status</option>
+                                }
+
+                            }
+                        </select>
+                    </td>
+
+
                 </tr>
             }
         </table>

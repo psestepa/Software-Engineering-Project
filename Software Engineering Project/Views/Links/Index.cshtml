@@ -6,8 +6,8 @@
     }
 
 }
-
-@model IEnumerable<Software_Engineering_Project.Models.Link>
+@using Software_Engineering_Project.Models;
+@model IEnumerable<Link>
 
 <!DOCTYPE html>
 
@@ -27,12 +27,12 @@
 
             @foreach (var link in Model)
             {
-    <tr>
-        <td>
-            <a href="http://@(link.URL)">@(link.URL)</a>
+                <tr>
+                    <td>
+                        <a href="http://@(link.URL)">@(link.URL)</a>
 
-        </td>
-    </tr>
+                    </td>
+                </tr>
             }
         </table>
 
