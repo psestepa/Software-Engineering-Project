@@ -30,9 +30,9 @@ namespace Software_Engineering_Project.Controllers
             return RedirectToAction("Index","Login");
         }
 
-        public ActionResult User_Management()
+        public ActionResult Users_Management()
         {
-            return RedirectToAction("Index", "User_Management");
+            return RedirectToAction("Index", "Users_Management");
         }
 
         public ActionResult Links_Management()

@@ -1,0 +1,120 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Convert.ToInt32(Session["RoleID"]) != 0 || Session["AccountID"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
+
+@using Software_Engineering_Project.Models;
+@model Tuple<IEnumerable<UsersData>, IEnumerable<Role>, IEnumerable<Status_Entity>>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+
+
+            @foreach (var userdata in Model.Item1)
+            {
+                <tr>
+                    <td>@userdata.Username</td>
+                    <td>@userdata.Role_Name</td>
+                    <td>@userdata.Status</td>
+                    <td></td>
+                </tr>
+            }
+
+            @using (Html.BeginForm("Register", "Users_Management", FormMethod.Post))
+            {
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Add User</h3></td><td></td><td></td><td></td></tr>
+                <tr>
+
+                    <td>
+                        @Html.LabelFor(model => model.Item1.ElementAt(0).Username)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Item1.ElementAtOrDefault(-1).Username)
+                    </td>
+                    <td>
+                        <input type="Submit" value="Submit" />
+                        <input type="reset" value="Clear" />
+                    </td>
+                    <td></td>
+                </tr>
+            }
+
+            @using (Html.BeginForm("Remove", "Users_Management", FormMethod.Post))
+            {
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Remove User</h3></td><td></td><td></td><td></td></tr>
+                <tr><th>Select User</th><th></th><th></th><th></th></tr>
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(model => model.Item1.ElementAt(0).Username,
+                        new SelectList(Model.Item1),
+                        "Select Value")
+                    </td>
+                    <td>
+                        <input type="Submit" value="Submit" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+
+            @using (Html.BeginForm("EditUser", "Users_Management", FormMethod.Post))
+            {
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Edit User</h3></td><td></td><td></td><td></tr>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                <tr>
+
+                    <td>
+                        @Html.DropDownListFor(model => model.Item1.ElementAt(0).Username,
+                        new SelectList(Model.Item1),
+                        "Select Value")
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.Item1.ElementAt(0).Role_Name,
+                         new SelectList(Model.Item2),
+                         "Select Value")
+                    </td>
+
+                    <td>
+                        @Html.DropDownListFor(model => model.Item1.ElementAt(0).Status,
+                         new SelectList(Model.Item3),
+                         "Select Value")
+                    </td>
+
+                    <td>
+                        <input type="Submit" value="Save Changes" />
+                    </td>
+
+                </tr>
+            }
+
+
+        </table>
+
+    </div>
+</body>
+</html>
