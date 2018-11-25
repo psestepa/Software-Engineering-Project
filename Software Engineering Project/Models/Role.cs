@@ -17,5 +17,10 @@ namespace Software_Engineering_Project.Models
         public int RoleID { get; set; }
         public string Role_Name { get; set; }
         public string Role_description { get; set; }
+
+        public override string ToString()
+        {
+            return this.Role_Name;
+        }
     }
 }

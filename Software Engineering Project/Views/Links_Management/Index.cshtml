@@ -30,45 +30,31 @@
 
             </tr>
 
-            @using (Html.BeginForm("EditRole", "Links_Management", FormMethod.Post))
+
+
+            @for (int idx = 0; idx < Model.Item1.Count(); idx++)
             {
-
-                foreach (var linkdata in Model.Item1)
+                 using (Html.BeginForm("EditRole", "Links_Management", FormMethod.Post))
                 {
+                <tr>
+                <td>@Html.DisplayFor(model => model.Item1.ElementAt(idx).URL)</td>
+                <td>
+                    @Html.DropDownListFor(model => model.Item1.ElementAt(idx).Role_Name,
+                     new SelectList(Model.Item2),
+                     Model.Item1.ElementAt(idx).Role_Name)
+                </td>
 
-                    <tr>
-                        <td>@linkdata.URL</td>
-                        <td>
-                            <select id="RoleNamesList">
-                                <option>@linkdata.Role_Name</option>
-                                @foreach (var options in Model.Item2)
-                                {
-                                    if (linkdata.Role_Name != options.Role_Name)
-                                    {
-                                        <option>@options.Role_Name</option>
-                                    }
+                <td>
+                    @Html.DropDownListFor(model => model.Item1.ElementAt(idx).Status,
+                     new SelectList(Model.Item3),
+                     Model.Item1.ElementAt(idx).Status)
+                </td>
 
-                                }
-                            </select>
-                        </td>
-                        <td>
-                            <select id="StatusList">
-                                <option>@linkdata.Status</option>
-                                @foreach (var options in Model.Item3)
-                                {
-                                    if (linkdata.Status != options.Status)
-                                    {
-                                        <option>@options.Status</option>
-                                    }
+                <td>
+                    <input type="Submit" value="Save Changes" />
+                </td>
 
-                                }
-                            </select>
-                        </td>
-                        <td>
-                            <input type="Submit" value="Save" />
-                        </td>
-
-                    </tr>
+                </tr>
                 }
             }
         </table>

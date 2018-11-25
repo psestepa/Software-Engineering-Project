@@ -16,5 +16,12 @@ namespace Software_Engineering_Project.Models
     {
         public int StatusID { get; set; }
         public string Status { get; set; }
+
+        public override string ToString()
+        {
+            return this.Status;
+        }
     }
+
+ 
 }
