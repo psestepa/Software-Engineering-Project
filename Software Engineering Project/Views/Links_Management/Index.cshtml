@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
+
 <body>
     <div>
         <table class="table">
@@ -29,43 +30,50 @@
 
             </tr>
 
-
-            @foreach (var linkdata in Model.Item1)
+            @using (Html.BeginForm("EditRole", "Links_Management", FormMethod.Post))
             {
-                <tr>
-                    <td>@linkdata.URL</td>
-                    <td>
-                        <select id="RoleNamesList">
-                            <option>@linkdata.Role_Name</option>
-                            @foreach (var options in Model.Item2)
-                            {
-                                if (linkdata.Role_Name != options.Role_Name)
+
+                foreach (var linkdata in Model.Item1)
+                {
+
+                    <tr>
+                        <td>@linkdata.URL</td>
+                        <td>
+                            <select id="RoleNamesList">
+                                <option>@linkdata.Role_Name</option>
+                                @foreach (var options in Model.Item2)
                                 {
-                                    <option onchange="EditRole">@options.Role_Name</option>
-                                }
+                                    if (linkdata.Role_Name != options.Role_Name)
+                                    {
+                                        <option>@options.Role_Name</option>
+                                    }
 
-                            }
-                        </select>
-                    </td>
-                    <td>
-                        <select id="StatusList">
-                            <option>@linkdata.Status</option>
-                            @foreach (var options in Model.Item3)
-                            {
-                                if (linkdata.Status != options.Status)
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <select id="StatusList">
+                                <option>@linkdata.Status</option>
+                                @foreach (var options in Model.Item3)
                                 {
-                                    <option>@options.Status</option>
+                                    if (linkdata.Status != options.Status)
+                                    {
+                                        <option>@options.Status</option>
+                                    }
+
                                 }
+                            </select>
+                        </td>
+                        <td>
+                            <input type="Submit" value="Save" />
+                        </td>
 
-                            }
-                        </select>
-                    </td>
-
-
-                </tr>
+                    </tr>
+                }
             }
         </table>
 
     </div>
+   
 </body>
 </html>

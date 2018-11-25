@@ -23,7 +23,7 @@ namespace Software_Engineering_Project.Controllers
         }
 
         [HttpPost] //important for logging in
-        public ActionResult Authorize(Software_Engineering_Project.Models.Account userModel)
+        public ActionResult Authorize(Account userModel)
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {

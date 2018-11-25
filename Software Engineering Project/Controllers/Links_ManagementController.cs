@@ -47,5 +47,15 @@ namespace Software_Engineering_Project.Controllers
             }
 
         }
+
+        [HttpPost]
+        public ActionResult EditRole(LinksData LinkModel, Role RoleModel)
+        {
+            using (portaldatabaseEntities db = new portaldatabaseEntities())
+            {
+                db.Database.SqlQuery<Link>("update dbo.links set RoleID = (select RoleID from dbo.Roles where Roles.Role_Name = '"+RoleModel.Role_Name+"') where links.URL = '"+LinkModel.URL+"'");
+            }
+            return RedirectToAction("Index", "Links_Management");
+        }
     }
 }

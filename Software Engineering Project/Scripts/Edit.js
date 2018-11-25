@@ -1,1 +1,4 @@
 ﻿
+function EditRole() {
+    alert(value);
+}

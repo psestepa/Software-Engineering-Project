@@ -17,7 +17,7 @@ namespace Software_Engineering_Project.Controllers
 
 
         [HttpPost] 
-        public ActionResult Register(Software_Engineering_Project.Models.Account userModel)
+        public ActionResult Register(Account userModel)
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
