@@ -16,7 +16,8 @@ namespace Software_Engineering_Project.Models
     {
         public int LinkID { get; set; }
         public string URL { get; set; }
-        public int RoleID { get; set; }
-        public int StatusID { get; set; }
+        public Nullable<int> StatusID { get; set; }
+        public Nullable<int> RoleID { get; set; }
+        public string RegistrationSuccessMessage { get; set; }
     }
 }

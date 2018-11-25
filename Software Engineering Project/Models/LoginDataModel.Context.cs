@@ -28,7 +28,6 @@ namespace Software_Engineering_Project.Models
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Link> Links { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<Status_Entity> Status_Entity { get; set; }
-        public DbSet<LinksData> LinksData { get; set; }
+        public DbSet<Status_Entity> Status { get; set; }
     }
 }

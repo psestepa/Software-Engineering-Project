@@ -8,6 +8,7 @@
         public string URL { get; set; }
         public string Role_Name{ get; set; }
         public string Status { get; set; }
+        public string RegistrationSuccessMessage { get; set; }
 
         public override string ToString()
         {
