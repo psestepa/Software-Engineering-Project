@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Convert.ToInt32(Session["RoleID"]) != 0 || Session["AccountID"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
+
+@using Software_Engineering_Project.Models;
+@model IEnumerable<Role>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <tr>
+                <th>RoleID</th>
+                <th>Role</th>
+            </tr>
+
+
+            @foreach (var roledata in Model)
+            {
+                <tr>
+                    <td>@roledata.RoleID</td>
+                    <td>@roledata.Role_Name</td>
+                    <td></td>
+                </tr>
+            }
+
+            @using (Html.BeginForm("Register", "Roles_Management", FormMethod.Post))
+            {
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Add Role</h3></td><td></td><td></td><td></td></tr>
+                <tr>
+                    <th>
+                        Role Name
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+
+                    <td>
+                        @Html.EditorFor(model => model.ElementAtOrDefault(-1).Role_Name)
+                    </td>
+                    <td>
+                        <input type="Submit" value="Submit" />
+                        <input type="reset" value="Clear" />
+                    </td>
+                    <td></td>
+                </tr>
+            }
+
+            @using (Html.BeginForm("Remove", "Roles_Management", FormMethod.Post))
+            {
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Remove Role</h3></td><td></td><td></td><td></td></tr>
+                <tr><th>Select URL</th><th></th><th></th><th></th></tr>
+                <tr>
+                    <td>
+                        @Html.DropDownListFor(model => model.ElementAt(0).Role_Name,
+                        new SelectList(Model),
+                        "Select Value")
+                    </td>
+                    <td>
+                        <input type="Submit" value="Submit" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</body>
+</html>

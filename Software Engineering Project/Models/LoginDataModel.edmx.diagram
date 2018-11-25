@@ -7,8 +7,8 @@
       <Diagram DiagramId="65e6b94b63064050a756011ef2abaa25" Name="Diagram1">
         <EntityTypeShape EntityType="portaldatabaseModel.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="portaldatabaseModel.Link" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="portaldatabaseModel.Role" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="portaldatabaseModel.Status" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="portaldatabaseModel.Status" Width="1.5" PointX="2.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="portaldatabaseModel.Role" Width="1.5" PointX="0.875" PointY="3.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

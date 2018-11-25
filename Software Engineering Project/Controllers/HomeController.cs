@@ -40,6 +40,11 @@ namespace Software_Engineering_Project.Controllers
             return RedirectToAction("Index", "Links_Management");
         }
 
+        public ActionResult Roles_Management()
+        {
+            return RedirectToAction("Index", "Roles_Management");
+        }
+
         public ActionResult Register()
         {
             return RedirectToAction("Index", "Register");
