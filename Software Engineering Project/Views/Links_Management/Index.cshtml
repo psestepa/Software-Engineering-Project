@@ -31,32 +31,46 @@
             </tr>
 
 
-
-            @for (int idx = 0; idx < Model.Item1.Count(); idx++)
+            @foreach (var linksdata in Model.Item1)
             {
-                 using (Html.BeginForm("EditRole", "Links_Management", FormMethod.Post))
-                {
-                <tr>
-                <td>@Html.DisplayFor(model => model.Item1.ElementAt(idx).URL)</td>
-                <td>
-                    @Html.DropDownListFor(model => model.Item1.ElementAt(idx).Role_Name,
-                     new SelectList(Model.Item2),
-                     Model.Item1.ElementAt(idx).Role_Name)
-                </td>
-
-                <td>
-                    @Html.DropDownListFor(model => model.Item1.ElementAt(idx).Status,
-                     new SelectList(Model.Item3),
-                     Model.Item1.ElementAt(idx).Status)
-                </td>
-
-                <td>
-                    <input type="Submit" value="Save Changes" />
-                </td>
-
-                </tr>
-                }
+            <tr>
+                <td>@linksdata.URL</td>
+                <td>@linksdata.Role_Name</td>
+                <td>@linksdata.Status</td>
+                <td></td>
+            </tr>
             }
+           
+                @using (Html.BeginForm("EditRole", "Links_Management", FormMethod.Post))
+                {
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td><h3>Edit Link</h3></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        
+                        <td>
+                            @Html.DropDownListFor(model => model.Item1.ElementAt(0).URL,
+                            new SelectList(Model.Item1),
+                            "Select Value")
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(model => model.Item1.ElementAt(0).Role_Name,
+                             new SelectList(Model.Item2),
+                             "Select Value")
+                        </td>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.Item1.ElementAt(0).Status,
+                             new SelectList(Model.Item3),
+                             "Select Value")
+                        </td>
+
+                        <td>
+                            <input type="Submit" value="Save Changes" />
+                        </td>
+
+                    </tr>
+                }
+            
         </table>
 
     </div>

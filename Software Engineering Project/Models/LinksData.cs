@@ -8,5 +8,10 @@
         public string URL { get; set; }
         public string Role_Name{ get; set; }
         public string Status { get; set; }
+
+        public override string ToString()
+        {
+            return this.URL;
+        }
     }
 }
