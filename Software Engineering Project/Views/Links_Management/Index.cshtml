@@ -34,7 +34,7 @@
             @foreach (var linksdata in Model.Item1)
             {
                 <tr>
-                    <td>@linksdata.URL</td>
+                    <td><a href="http://@(linksdata.URL)">@(linksdata.URL)</a></td>
                     <td>@linksdata.Role_Name</td>
                     <td>@linksdata.Status</td>
                     <td></td>

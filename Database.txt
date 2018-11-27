@@ -1,3 +1,8 @@
 den1.mssql8.gear.host
 portaldatabase
 Test1234!
+
+To do:
+Make a profile page and be able to edit username and password
+Welcome link on the navbar (Session["Name"] = Username)
+back button
