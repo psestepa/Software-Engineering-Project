@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["AccountID"] == null)
+    {
+        Response.Redirect("~/Home/Index");
+    }
+}
+
+@using Software_Engineering_Project.Models;
+@model UserProfile
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table class="table">
+            
+            <tr><td><h3>Current User</h3></td><td><h3>Role</h3></td><td></td><td></td></tr>
+            
+            <tr><td>@Session["Name"].ToString().ToUpper()</td><td>@Session["RoleName"].ToString().ToUpper()</td><td></td></tr>
+
+            
+            <tr><td><h3>Change Username</h3></td><td></td><td></td><td></td></tr>
+             @using (Html.BeginForm("EditUsername", "EditProfile", FormMethod.Post))
+             {
+            <tr>
+                <th>Type New Username</th>
+                <th>Confirm Password </th>
+                <th>(You will be logged out)</th>
+            </tr>
+            <tr>
+
+                <td>@Html.EditorFor(model => model.newUsername)</td>
+                <td>@Html.EditorFor(model => model.oldPassword)</td>
+                <td>
+                    <input type="Submit" value="Submit" />
+                    <input type="reset" value="Clear" />
+                </td>
+            </tr>
+             }
+
+            
+            <tr><td><h3>Change Password</h3></td><td></td><td></td><td></td></tr>
+             @using (Html.BeginForm("EditPassword", "EditProfile", FormMethod.Post))
+             {
+            <tr>
+                <th>Type Current Password</th>
+                <th>Type New Password </th>
+                <th>(You will be logged out)</th>
+            </tr>
+            <tr>
+                <td>@Html.EditorFor(model => model.oldPassword)</td>
+                <td>@Html.EditorFor(model => model.newPassword)</td>
+                <td>
+                    <input type="Submit" value="Submit" />
+                    <input type="reset" value="Clear" />
+                </td>
+            </tr>
+             }
+            <tr><td></td><td></td><td></td><td></td></tr>
+
+
+        </table>
+
+    </div>
+</body>
+</html>

@@ -153,6 +153,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EditProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinksController.cs" />
     <Compile Include="Controllers\Links_ManagementController.cs" />
@@ -185,6 +186,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoginDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
@@ -257,6 +259,7 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Links_Management\Index.cshtml" />
     <Content Include="Views\Roles_Management\Index.cshtml" />
+    <Content Include="Views\EditProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

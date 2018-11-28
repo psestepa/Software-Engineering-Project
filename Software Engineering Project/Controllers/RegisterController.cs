@@ -57,9 +57,9 @@ namespace Software_Engineering_Project.Controllers
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
-                var Username = db.Accounts.Where(x => x.Username == userModel.Username).FirstOrDefault();
+                var User = db.Accounts.Where(x => x.Username == userModel.Username).FirstOrDefault();
                 //check if user exists in the database already
-                if (Username == null) //not in db
+                if (User == null) //not in db
                 {
                     return false;
                 }

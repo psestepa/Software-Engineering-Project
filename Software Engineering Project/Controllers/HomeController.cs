@@ -64,5 +64,10 @@ namespace Software_Engineering_Project.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult EditProfile()
+        {
+            return RedirectToAction("Index", "EditProfile");
+        }
+
     }
 }

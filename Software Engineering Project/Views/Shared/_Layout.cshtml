@@ -62,6 +62,7 @@
                     }
                     @if (Session["AccountID"] != null)
                     {
+                        <li>@Html.ActionLink("Welcome to Sanio, "+Session["Name"].ToString().ToUpper()+"!", "EditProfile", "Home")</li>
                         <li><a href="@Url.Action("LogOut","Login")">Log Out</a></li>
                     }
                 </ul>
