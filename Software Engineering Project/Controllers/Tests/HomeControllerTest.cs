@@ -5,15 +5,14 @@ using Software_Engineering_Project.Controllers;
 namespace Tests.Controllers
 {
     [TestClass]
-    public class RegisterControllerTest
+    public class HomeControllerTest
     {
         [TestMethod]
         public void TestActionResult()
         {
-            var controller = new RegisterController();
+            var controller = new HomeController();
             var result = controller.Index() as ActionResult;
             Assert.AreEqual(result, result);
-
         }
 
     }
