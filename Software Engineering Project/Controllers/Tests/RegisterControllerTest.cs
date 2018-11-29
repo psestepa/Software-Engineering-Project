@@ -8,13 +8,12 @@ namespace Tests.Controllers
     public class RegisterControllerTest
     {
         [TestMethod]
-        public void TestActionResult()
+        public void TestDetailsView()
         {
             var controller = new RegisterController();
             var result = controller.Index() as ActionResult;
             Assert.AreEqual(result, result);
 
         }
-
     }
 }
