@@ -38,13 +38,13 @@ namespace Software_Engineering_Project.Controllers
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
-                //Set Username
+                //Set Username and password from the view
                 string oldUsername = Session["Name"].ToString();
                 string newUsername = userModel.newUsername;
                 string password = userModel.oldPassword;
                 var userDetails = db.Accounts.Where(x => x.Username == oldUsername && x.Password == password).FirstOrDefault();
 
-                if(userDetails == null || checkExistingUser(userModel) == true) //wrong username/password
+                if(userDetails == null || checkExistingUser(userModel) == true) //wrong username/password or username already exists
                 {
                     return RedirectToAction("Index", "EditProfile");
                 }
@@ -52,6 +52,7 @@ namespace Software_Engineering_Project.Controllers
                 else
                 {
                     db.Database.ExecuteSqlCommand("update dbo.Accounts set Username = '" + newUsername + "' where Username = '" + oldUsername + "'");
+                    //log out user after the change
                     int AccountID = (int)Session["AccountID"];
                     Session.Abandon();
                     return RedirectToAction("Index", "EditProfile");
@@ -65,13 +66,13 @@ namespace Software_Engineering_Project.Controllers
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
-                //Set Password
+                //Set Username Password
                 string oldUsername = Session["Name"].ToString();
                 string newPassword = userModel.newPassword;
                 string oldPassword = userModel.oldPassword;
                 var userDetails = db.Accounts.Where(x => x.Username == oldUsername && x.Password == oldPassword).FirstOrDefault();
 
-                if (userDetails == null) //wrong username/password
+                if (userDetails == null) //wrong username/password 
                 {
                     return RedirectToAction("Index", "EditProfile");
                 }
@@ -79,6 +80,7 @@ namespace Software_Engineering_Project.Controllers
                 else
                 {
                     db.Database.ExecuteSqlCommand("update dbo.Accounts set Password = '" + newPassword + "' where Username = '" + oldUsername + "'");
+                    //logout
                     int AccountID = (int)Session["AccountID"];
                     Session.Abandon();
                     return RedirectToAction("Index", "EditProfile");

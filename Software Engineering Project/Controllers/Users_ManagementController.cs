@@ -16,6 +16,7 @@ namespace Software_Engineering_Project.Controllers
             IEnumerable<Role> RoleNames = getRoleNames();
             IEnumerable<Status_Entity> Status = getStatus();
             IEnumerable<UsersData> Users = getUsersData();
+            //We're using a tuple to return 3 models to the view
             var tuple = new Tuple<IEnumerable<UsersData>, IEnumerable<Role>, IEnumerable<Status_Entity>>(Users, RoleNames, Status);
             return View(tuple);
         }
@@ -29,7 +30,7 @@ namespace Software_Engineering_Project.Controllers
             }
         }
 
-        public IEnumerable<Role> getRoleNames()
+        public IEnumerable<Role> getRoleNames() //function to get all roles from db
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
@@ -38,7 +39,7 @@ namespace Software_Engineering_Project.Controllers
 
         }
 
-        public IEnumerable<Status_Entity> getStatus()
+        public IEnumerable<Status_Entity> getStatus() //function to get all status from db
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
@@ -50,31 +51,25 @@ namespace Software_Engineering_Project.Controllers
         [HttpPost]
         public ActionResult EditUser(UsersData UserModel, Role RoleModel, Status_Entity StatusModel)
         {
+            //Set username, rolename, status = from the view
             string Username = UserModel.Username;
             string Rolename = RoleModel.Role_Name;
             string Statusname = StatusModel.Status;
+            //all fields have to be changed to edit a user
             if (Username == null || Rolename == null || Statusname == null)
             {
                 return RedirectToAction("Index", "Users_Management");
             }
             else
             {
-                SqlConnection conn = new SqlConnection();
-                conn.ConnectionString =
-                "Data Source = den1.mssql8.gear.host;" +
-                "Initial Catalog=portaldatabase;" +
-                "User id=portaldatabase;" +
-                "Password=Test1234!;";
-
-                string commandText = "update dbo.Accounts set RoleID = (select RoleID from dbo.Roles where" +
-                    " Roles.Role_Name = '" + Rolename + "'), StatusID = (select StatusID from dbo.Status where Status.Status = '" + Statusname + "')" +
-                    " where Accounts.Username = '" + Username + "'";
-                using (SqlCommand cmd = new SqlCommand(commandText, conn))
+                //update the role and status of the user
+                using (portaldatabaseEntities db = new portaldatabaseEntities())
                 {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                    db.Database.ExecuteSqlCommand("update dbo.Accounts set RoleID = (select RoleID from dbo.Roles where" +
+                    " Roles.Role_Name = '" + Rolename + "'), StatusID = (select StatusID from dbo.Status where Status.Status = '" + Statusname + "')" +
+                    " where Accounts.Username = '" + Username + "'");
                 }
+
                 return RedirectToAction("Index", "Users_Management");
             }
         }
@@ -119,13 +114,13 @@ namespace Software_Engineering_Project.Controllers
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
                 var Username = db.Accounts.Where(x => x.Username == userModel.Username).FirstOrDefault();
-                //check if URL exists in the database already
+                //check if Username exists in the database already
                 if (Username == null) //not in db
                 {
                     return false;
                 }
                 else
-                    return true; //return true if URL is in db
+                    return true; //return true if Username is in db
             }
 
         }

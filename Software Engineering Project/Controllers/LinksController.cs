@@ -21,12 +21,18 @@ namespace Software_Engineering_Project.Controllers
 
         public IEnumerable<Link> getLinks()
         {
-            //checks if RoleID in the database == roleID in the links
-            int User_RoleID = Convert.ToInt32(Session["RoleID"]);
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
-                //return a list of links where roleID from db == roleID of the logged user
-                return db.Links.ToList().Where(x => (x.RoleID == User_RoleID || x.RoleID == 3) && x.StatusID == 1 );
+                if (Session["RoleID"] == null)
+                {
+                    return db.Links.ToList().Where(x => x.RoleID == 3 && x.StatusID == 1); //return all global links that are active
+                }
+                else
+                {
+                    int User_RoleID = (int)(Session["RoleID"]);
+                    //return a list of links where roleID from db == roleID of the logged user or global and active
+                    return db.Links.ToList().Where(x => (x.RoleID == User_RoleID || x.RoleID == 3) && x.StatusID == 1);
+                } 
             }
         }
 

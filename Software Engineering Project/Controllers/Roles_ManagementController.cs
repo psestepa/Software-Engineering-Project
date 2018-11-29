@@ -34,11 +34,11 @@ namespace Software_Engineering_Project.Controllers
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
-                //Set the URL name
+                //Set the Role name
                 Role newRole = new Role();
                 newRole.Role_Name = roleModel.Role_Name;
                 newRole.Role_description = roleModel.Role_Name;
-                //Check if user already exists in server
+                //Check if Role already exists in server
                 if (checkExistingRole(roleModel) == false && newRole.Role_Name != null)
                 {
                     //Call function to add to the database
@@ -57,7 +57,7 @@ namespace Software_Engineering_Project.Controllers
             //create new database object
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
-                //add new user to database
+                //add new role to database
                 db.Roles.Add(newRole);
                 //save changes to database
                 db.SaveChanges();
@@ -83,8 +83,8 @@ namespace Software_Engineering_Project.Controllers
         public ActionResult Remove(Role roleModel)
         {
             string RoleName = roleModel.Role_Name;
-            bool checkRoles = checkRoleInLinks(roleModel);
-            if(checkRoles == false)
+            bool checkRoles = checkRoleInLinksAndUsers(roleModel); 
+            if(checkRoles == false) //role is not in db and not a default role
             {
                 using (portaldatabaseEntities db = new portaldatabaseEntities())
                 {
@@ -98,7 +98,8 @@ namespace Software_Engineering_Project.Controllers
 
         }
 
-        public bool checkRoleInLinks(Role roleModel)
+        //checks if a role is currently assigned to a user or a link
+        public bool checkRoleInLinksAndUsers(Role roleModel)
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {

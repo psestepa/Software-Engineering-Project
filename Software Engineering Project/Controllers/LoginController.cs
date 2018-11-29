@@ -22,23 +22,23 @@ namespace Software_Engineering_Project.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost] //important for logging in
+        [HttpPost]
         public ActionResult Authorize(Account userModel)
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
                 var userDetails = db.Accounts.Where(x => x.Username == userModel.Username && x.Password == userModel.Password).FirstOrDefault();
                 var account_status = db.Accounts.Where(x => x.Username == userModel.Username && x.Password == userModel.Password && x.StatusID == 1).FirstOrDefault();
-                string roleName = db.Roles.Where(x => x.RoleID == userDetails.RoleID).Select(y => y.Role_Name).FirstOrDefault();
+               
 
                 if (userDetails != null) //Correct username/password
                 {
                     if (account_status != null) //check if status is good
                     {
                         Session["Name"] = userDetails.Username;
+                        Session["RoleName"] = db.Roles.Where(x => x.RoleID == userDetails.RoleID).Select(y => y.Role_Name).FirstOrDefault();
                         Session["AccountID"] = userDetails.AccountID;
                         Session["RoleID"] = userDetails.RoleID;
-                        Session["RoleName"] = roleName;
                         return RedirectToAction("Index", "Home");
                     }
                     else

@@ -16,6 +16,7 @@ namespace Software_Engineering_Project.Controllers
             IEnumerable<Role> RoleNames = getRoleNames();
             IEnumerable<Status_Entity> Status = getStatus();
             IEnumerable<LinksData> Links = getLinksData();
+            //we're returning 3 models to the view
             var tuple = new Tuple<IEnumerable<LinksData>, IEnumerable<Role>, IEnumerable<Status_Entity>>(Links, RoleNames, Status);
             return View(tuple);
         }
@@ -29,7 +30,7 @@ namespace Software_Engineering_Project.Controllers
             }
         }
 
-        public IEnumerable<Role> getRoleNames()
+        public IEnumerable<Role> getRoleNames()//function to get all the roles from the db to a list
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
@@ -38,7 +39,7 @@ namespace Software_Engineering_Project.Controllers
 
         }
 
-        public IEnumerable<Status_Entity> getStatus()
+        public IEnumerable<Status_Entity> getStatus()//function to get all the status from the db to list
         {
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
@@ -53,29 +54,22 @@ namespace Software_Engineering_Project.Controllers
             string URLname = LinkModel.URL;
             string Rolename = RoleModel.Role_Name;
             string Statusname = StatusModel.Status;
+            //All fields have to be filled out to edit role
             if (URLname == null || Rolename == null || Statusname == null)
             {
                 return RedirectToAction("Index", "Links_Management");
             }
             else
             {
-                SqlConnection conn = new SqlConnection();
-                conn.ConnectionString =
-                "Data Source = den1.mssql8.gear.host;" +
-                "Initial Catalog=portaldatabase;" +
-                "User id=portaldatabase;" +
-                "Password=Test1234!;";
-
-                string commandText = "update dbo.links set RoleID = (select RoleID from dbo.Roles where" +
-                    " Roles.Role_Name = '" + Rolename + "'), StatusID = (select StatusID from dbo.Status where Status.Status = '" + Statusname + "')" +
-                    " where links.URL = '" + URLname + "'";
-                using (SqlCommand cmd = new SqlCommand(commandText, conn))
+                //updating the role for the link
+                using (portaldatabaseEntities db = new portaldatabaseEntities())
                 {
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                    db.Database.ExecuteSqlCommand("update dbo.links set RoleID = (select RoleID from dbo.Roles where" +
+                    " Roles.Role_Name = '" + Rolename + "'), StatusID = (select StatusID from dbo.Status where Status.Status = '" + Statusname + "')" +
+                    " where links.URL = '" + URLname + "'");
                 }
-                return RedirectToAction("Index", "Links_Management");
+                
+                    return RedirectToAction("Index", "Links_Management");
             }
         }
 
@@ -87,8 +81,8 @@ namespace Software_Engineering_Project.Controllers
                 //Set the URL name
                 Link newLink = new Link();
                 newLink.URL = linkModel.URL;
-                //Check if user already exists in server
-                if (checkExistingLink(linkModel) == false && newLink.URL != null)
+                //Check if link already exists in server
+                if (checkExistingLink(linkModel) == false && newLink.URL != null) //check if not in the db and the URL is not null
                 {
                     //Call function to add to the database
                     AddLink(newLink);
@@ -106,7 +100,7 @@ namespace Software_Engineering_Project.Controllers
             //create new database object
             using (portaldatabaseEntities db = new portaldatabaseEntities())
             {
-                //add new user to database
+                //add new link to database
                 db.Links.Add(newLink);
                 //save changes to database
                 db.SaveChanges();
