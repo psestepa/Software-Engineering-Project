@@ -9,7 +9,7 @@ namespace Software_Engineering_Project.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
+        
         public ActionResult Index()
         {
             return View();
