@@ -16,6 +16,23 @@ namespace Software_Engineering_Project.Controllers
             return View();
         }
 
+        //checks if username already exists, if it does, you may not change your username
+        public bool checkExistingUser(UserProfile userModel)
+        {
+            using (portaldatabaseEntities db = new portaldatabaseEntities())
+            {
+                var User = db.Accounts.Where(x => x.Username == userModel.newUsername).FirstOrDefault();
+                //check if user exists in the database already
+                if (User == null) //not in db
+                {
+                    return false;
+                }
+                else
+                    return true; //return true if user is in db
+            }
+
+        }
+
         [HttpPost]
         public ActionResult EditUsername(UserProfile userModel)
         {
@@ -27,7 +44,7 @@ namespace Software_Engineering_Project.Controllers
                 string password = userModel.oldPassword;
                 var userDetails = db.Accounts.Where(x => x.Username == oldUsername && x.Password == password).FirstOrDefault();
 
-                if(userDetails == null) //wrong username/password
+                if(userDetails == null || checkExistingUser(userModel) == true) //wrong username/password
                 {
                     return RedirectToAction("Index", "EditProfile");
                 }
