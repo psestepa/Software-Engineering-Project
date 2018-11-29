@@ -163,7 +163,6 @@
     <Compile Include="Controllers\Links_ManagementController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
-    <Compile Include="Controllers\Tests\EditProfileControllerTest.cs" />
     <Compile Include="Controllers\Tests\RegisterControllerTest.cs" />
     <Compile Include="Controllers\Roles_ManagementController.cs" />
     <Compile Include="Controllers\Users_ManagementController.cs" />
@@ -269,7 +268,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EditProfileControllerTest\" />
     <Folder Include="Views\RegisterControllerTest\" />
   </ItemGroup>
   <ItemGroup>
