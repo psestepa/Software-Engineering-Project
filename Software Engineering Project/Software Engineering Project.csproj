@@ -163,8 +163,14 @@
     <Compile Include="Controllers\Links_ManagementController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\Tests\EditProfileControllerTest1.cs" />
+    <Compile Include="Controllers\Tests\HomeControllerTest1.cs" />
+    <Compile Include="Controllers\Tests\Links_ManagementControllerTest.cs" />
+    <Compile Include="Controllers\Tests\LoginControllerTest.cs" />
     <Compile Include="Controllers\Tests\RegisterControllerTest.cs" />
     <Compile Include="Controllers\Roles_ManagementController.cs" />
+    <Compile Include="Controllers\Tests\Roles_ManagementControllerTest.cs" />
+    <Compile Include="Controllers\Tests\Users_ManagementControllerTest.cs" />
     <Compile Include="Controllers\Users_ManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -268,7 +274,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EditProfileControllerTest1\" />
+    <Folder Include="Views\HomeControllerTest1\" />
+    <Folder Include="Views\LinksControllerTest\" />
+    <Folder Include="Views\Links_ManagementControllerTest\" />
+    <Folder Include="Views\LoginControllerTest\" />
     <Folder Include="Views\RegisterControllerTest\" />
+    <Folder Include="Views\Roles_ManagementControllerTest\" />
+    <Folder Include="Views\User_ManagementControllerTest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
